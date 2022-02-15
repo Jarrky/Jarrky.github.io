@@ -1,0 +1,273 @@
+body {
+    background-color: #486a6a;
+}
+
+table, td {
+    border: 5px solid white;
+    border-collapse: collapse;
+    padding: 5px 5px;
+    color: white;
+    font-family: Tahoma;
+    font-size: 25px;
+}
+
+table {
+    text-align: center;
+    vertical-align: middle;
+}
+tr,td {
+    height:50px;
+    width:50px;
+}
+
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td {
+    padding: 5px 5px;
+    
+}
+
+#text {
+    position:absolute;
+    font-family: Tahoma;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius:2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 350px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2s;
+    animation: fadein 0.5s, fadeout 0.5s 2s;
+}
+
+@keyframes fadein {
+    from {bottom: 0;opacity:0;}
+    to {bottom: 350px; opacity:1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 350px; opacity: 1;}
+    to {bottom: 0;opacity:0;}
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.box {
+    background-color: rgba(0,0,0,0.2);
+    border: 1px solid white;
+    width: 650px;
+    margin: auto;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.btn-group button {
+    background-color: #b8ece5;
+    color: black;
+    padding: 10px 10px;
+    float: left;
+    font-family: 'Tahoma';
+    border: none;
+    display: inline-block;
+    margin: 2px 2px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+.btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+.btn-group button:hover {
+    background-color: #ccfbff;
+}
+
+.flex-parent {
+    display: flex;
+}
+
+.btn-group {
+    justify-content: center;
+}
+
+
+
+button {
+    height: 55px;
+    width: 55px;
+}
+
+
+.slatePulse0 {
+    animation: pulseSlate 0.6s forwards;
+}
+
+.greenPulse0 {
+    animation: pulseGreen 0.6s forwards;
+}
+
+.greenPulse1 {
+    animation-name: pulseGreen;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.3s;
+}
+
+.greenPulse2 {
+    animation-name: pulseGreen;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.6s;
+}
+
+.greenPulse3 {
+    animation-name: pulseGreen;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.9s;
+}
+
+.greenPulse4 {
+    animation-name: pulseGreen;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 1.2s;
+}
+
+.yellowPulse0 {
+    animation: pulseYellow 0.6s forwards;
+}
+
+.yellowPulse1 {
+    animation-name: pulseYellow;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.3s;
+}
+
+.yellowPulse2 {
+    animation-name: pulseYellow;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.6s;
+}
+
+.yellowPulse3 {
+    animation-name: pulseYellow;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.9s;
+}
+
+.yellowPulse4 {
+    animation-name: pulseYellow;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 1.2s;
+}
+
+.blackPulse0 {
+    animation: pulseBlack 0.6s forwards;
+}
+
+.blackPulse1 {
+    animation-name: pulseBlack;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.3s;
+}
+
+.blackPulse2 {
+    animation-name: pulseBlack;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.6s;
+}
+
+.blackPulse3 {
+    animation-name: pulseBlack;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 0.9s;
+}
+
+.blackPulse4 {
+    animation-name: pulseBlack;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-delay: 1.2s;
+}
+
+.resetPulse {
+    animation: pulseReset 0.2s forwards;
+}
+
+@keyframes pulseReset {
+    100% {
+        background-color: darkslategray;
+    }
+}
+
+@keyframes pulseSlate {
+    100% {
+        background-color: lightsteelblue;
+    }
+}
+
+@keyframes pulseYellow {
+    100% {
+        background-color: #c9b457;
+    }
+}
+
+@keyframes pulseBlack {
+    100% {
+        background-color: #787c7f;
+    }
+}
+
+@keyframes pulseGreen {
+    100% {
+        background-color: #6aaa65;
+    }
+    
+}
+

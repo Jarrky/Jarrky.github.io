@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    </style>
+</head>
+<body>
+    <br />
+    <table class="center">
+        <tr>
+            <td id="00"></td>
+            <td id="01"></td>
+            <td id="02"></td>
+            <td id="03"></td>
+            <td id="04"></td>
+        </tr>
+        <tr>
+            <td id="10"></td>
+            <td id="11"></td>
+            <td id="12"></td>
+            <td id="13"></td>
+            <td id="14"></td>
+        </tr>
+        <tr>
+            <td id="20"></td>
+            <td id="21"></td>
+            <td id="22"></td>
+            <td id="23"></td>
+            <td id="24"></td>
+        </tr>
+        <tr>
+            <td id="30"></td>
+            <td id="31"></td>
+            <td id="32"></td>
+            <td id="33"></td>
+            <td id="34"></td>
+        </tr>
+        <tr>
+            <td id="40"></td>
+            <td id="41"></td>
+            <td id="42"></td>
+            <td id="43"></td>
+            <td id="44"></td>
+        </tr>
+        <tr>
+            <td id="50"></td>
+            <td id="51"></td>
+            <td id="52"></td>
+            <td id="53"></td>
+            <td id="54"></td>
+        </tr>
+
+    </table>
+    <br />
+
+    <p></p>
+    <p id="log"></p>
+    <div class="box">
+        <div class="flex-parent btn-group">
+            <button type="button" onclick="letter('Q')" id="Q">Q</button>
+            <button type="button" onclick="letter('W')" id="W">W</button>
+            <button type="button" onclick="letter('E')" id="E">E</button>
+            <button type="button" onclick="letter('R')" id="R">R</button>
+            <button type="button" onclick="letter('T')" id="T">T</button>
+            <button type="button" onclick="letter('Y')" id="Y">Y</button>
+            <button type="button" onclick="letter('U')" id="U">U</button>
+            <button type="button" onclick="letter('I')" id="I">I</button>
+            <button type="button" onclick="letter('O')" id="O">O</button>
+            <button type="button" onclick="letter('P')" id="P">P</button>
+            <button type="button" onclick="backspace()" id="DEL">del</button>
+        </div>
+
+
+        <div class="flex-parent btn-group">
+            <button type="button" onclick="letter('A')" id="A">A</button>
+            <button type="button" onclick="letter('S')" id="S">S</button>
+            <button type="button" onclick="letter('D')" id="D">D</button>
+            <button type="button" onclick="letter('F')" id="F">F</button>
+            <button type="button" onclick="letter('G')" id="G">G</button>
+            <button type="button" onclick="letter('H')" id="H">H</button>
+            <button type="button" onclick="letter('J')" id="J">J</button>
+            <button type="button" onclick="letter('K')" id="K">K</button>
+            <button type="button" onclick="letter('L')" id="L">L</button>
+
+        </div>
+
+        <div class="flex-parent btn-group">
+            <button type="button" onclick="submitLets()" style="width:75px">SUBMIT</button>
+            <button type="button" onclick="letter('Z')" id="Z">Z</button>
+            <button type="button" onclick="letter('X')" id="X">X</button>
+            <button type="button" onclick="letter('C')" id="C">C</button>
+            <button type="button" onclick="letter('V')" id="V">V</button>
+            <button type="button" onclick="letter('B')" id="B">B</button>
+            <button type="button" onclick="letter('N')" id="N">N</button>
+            <button type="button" onclick="letter('M')" id="M">M</button>
+            <button type="button" onclick="clearLets(guessLevel)" style="width:75px">CLEAR</button>
+        </div>
+    </div>
+
+    <div id="overlay" onclick="off()">
+        <div id="text">Congratulations!</div>
+    </div>
+
+    <div id="snackbar">Not In Word List</div>
+
+
+    <script>
+        function notInList() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+
+    <script type="text/javascript" src="wordlist.js"></script>
+    
+    
+
+    <script>
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+
+    <script>
+        document.addEventListener('keydown', logKey);
+
+        function logKey(e) {
+            if ((`${e.code}`).includes("Key")) {
+                letter((`${e.code}`).substr(3));
+            }
+            else if ((`${e.code}`) == "Enter") {
+                submitLets();
+            }
+            else if ((`${e.code}`) == "Backspace") {
+                backspace();
+            }
+        }
+    </script>
+
+    <script>
+        const today = new Date().toDateString();
+        const dates = new Array(365);
+        dates[0] = new Date("02/10/2022");
+
+        for (i = 1; i < 365; i++) {
+            dates[i] = new Date("02/10/2022");
+            dates[i].setDate(dates[0].getDate() + i);
+            dates[i] = dates[i].toDateString();
+        }
+    </script>
+
+    <script>
+        var guessLevel = 0;
+        var wordToGuess = setWord(dates);
+
+        function backspace() {
+            for (let i = 4; i >= 0; i--) {
+                let k = guessLevel.toString() + i.toString();
+                if (document.getElementById(guessLevel.toString() + i.toString()).innerHTML != "") {
+                    document.getElementById(guessLevel.toString() + i.toString()).innerHTML = "";
+                    break;
+                }
+            }
+        }
+
+        function letter(example) {
+            for (let i = 0; i < 5; i++) {
+                let k = guessLevel.toString() + i.toString();
+                if (document.getElementById(k).innerHTML == "") {
+                    document.getElementById(k).innerHTML = example;
+                    break;
+                }
+            }
+        }
+
+        const scores = new Array(365).fill(7);
+
+        function updateScore(score) {
+            if (scores[dates.indexOf(today)] == 7) {
+                console.log("here");
+                scores[dates.indexOf(today)] = score;
+            }
+        }
+
+        function submitLets() {
+            let check = false;
+
+            var guessWord = document.getElementById(guessLevel.toString() + "0").innerHTML +
+                document.getElementById(guessLevel.toString() + "1").innerHTML +
+                document.getElementById(guessLevel.toString() + "2").innerHTML +
+                document.getElementById(guessLevel.toString() + "3").innerHTML +
+                document.getElementById(guessLevel.toString() + "4").innerHTML;
+
+            if (guessWord.length != 5) {
+                // window.alert("Not complete");
+            } else if (checkWord(guessWord) == 0) {
+                notInList();
+            } else {
+                check = true;
+            }    
+
+            if (check) {
+                const ans = [];
+
+                for (i = 0; i < 5; i++) {
+                    switch (wordToGuess.indexOf(guessWord[i])) {
+                        case i: // green
+                            ans[i] = 0;
+                            break;
+                        case -1: // black
+                            ans[i] = 1;
+                            break;
+                        default: // yellow
+                            ans[i] = 2;
+                            break;
+                    }
+                    changeClassName(i, ans[i], guessWord[i]);
+                }
+                guessLevel += 1;
+            }
+
+            if (wordToGuess == guessWord) {
+                setTimeout(reset, 3000);
+            }
+
+        }
+
+        function changeClassName(iteration, GYBS, guessLetter) {
+            switch (GYBS) {
+                case 0:
+                    document.getElementById(guessLevel.toString() + iteration.toString()).classList.toggle('greenPulse' + iteration.toString());
+                    document.getElementById(guessLetter.toString()).style.backgroundColor = '#6aaa65';
+                    break;
+                case 1:
+                    document.getElementById(guessLevel.toString() + iteration.toString()).classList.toggle('blackPulse' + iteration.toString());
+                    document.getElementById(guessLetter.toString()).style.backgroundColor = '#787c7f';
+                    break;
+                case 2:
+                    document.getElementById(guessLevel.toString() + iteration.toString()).classList.toggle('yellowPulse' + iteration.toString());
+                    document.getElementById(guessLetter.toString()).style.backgroundColor = '#c9b457';
+                    break;
+            }
+        }
+
+        function reset() {
+            clearLets(0);
+            clearLets(1);
+            clearLets(2);
+            clearLets(3);
+            clearLets(4);
+            clearLets(5);
+            for (j = 0; j < 6; j++) {
+                for (i = 0; i < 5; i++) {
+                    document.getElementById(j.toString() + i.toString()).classList.toggle('resetPulse');
+                }
+            }
+            guessLevel = 0;
+            on();
+        }
+
+    </script>
+
+    <script>
+        function clearLets(levelOn) {
+            for (let i = 0; i < 5; i++) {
+                let k = levelOn.toString() + i.toString();
+                document.getElementById(k).innerHTML = "";
+            }
+        }
+    </script>
+
+
+</body>
+
+
+</html>
+
+
