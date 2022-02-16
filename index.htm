@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <style>
     </style>
@@ -9,46 +10,46 @@
     <br />
     <table class="center">
         <tr>
-            <td id="00"></td>
-            <td id="01"></td>
-            <td id="02"></td>
-            <td id="03"></td>
-            <td id="04"></td>
+            <td><div class="content" id="B00"><div class="valign" id="00"></div></div></td>
+            <td><div class="content" id="B01"><div class="valign" id="01"></div></div></td>
+            <td><div class="content" id="B02"><div class="valign" id="02"></div></div></td>
+            <td><div class="content" id="B03"><div class="valign" id="03"></div></div></td>
+            <td><div class="content" id="B04"><div class="valign" id="04"></div></div></td>
         </tr>
         <tr>
-            <td id="10"></td>
-            <td id="11"></td>
-            <td id="12"></td>
-            <td id="13"></td>
-            <td id="14"></td>
+            <td><div class="content" id="B10"><div class="valign" id="10"></div></div></td>
+            <td><div class="content" id="B11"><div class="valign" id="11"></div></div></td>
+            <td><div class="content" id="B12"><div class="valign" id="12"></div></div></td>
+            <td><div class="content" id="B13"><div class="valign" id="13"></div></div></td>
+            <td><div class="content" id="B14"><div class="valign" id="14"></div></div></td>
         </tr>
         <tr>
-            <td id="20"></td>
-            <td id="21"></td>
-            <td id="22"></td>
-            <td id="23"></td>
-            <td id="24"></td>
+            <td><div class="content" id="B20"><div class="valign" id="20"></div></div></td>
+            <td><div class="content" id="B21"><div class="valign" id="21"></div></div></td>
+            <td><div class="content" id="B22"><div class="valign" id="22"></div></div></td>
+            <td><div class="content" id="B23"><div class="valign" id="23"></div></div></td>
+            <td><div class="content" id="B24"><div class="valign" id="24"></div></div></td>
         </tr>
         <tr>
-            <td id="30"></td>
-            <td id="31"></td>
-            <td id="32"></td>
-            <td id="33"></td>
-            <td id="34"></td>
+            <td><div class="content" id="B30"><div class="valign" id="30"></div></div></td>
+            <td><div class="content" id="B31"><div class="valign" id="31"></div></div></td>
+            <td><div class="content" id="B32"><div class="valign" id="32"></div></div></td>
+            <td><div class="content" id="B33"><div class="valign" id="33"></div></div></td>
+            <td><div class="content" id="B34"><div class="valign" id="34"></div></div></td>
         </tr>
         <tr>
-            <td id="40"></td>
-            <td id="41"></td>
-            <td id="42"></td>
-            <td id="43"></td>
-            <td id="44"></td>
+            <td><div class="content" id="B40"><div class="valign" id="40"></div></div></td>
+            <td><div class="content" id="B41"><div class="valign" id="41"></div></div></td>
+            <td><div class="content" id="B42"><div class="valign" id="42"></div></div></td>
+            <td><div class="content" id="B43"><div class="valign" id="43"></div></div></td>
+            <td><div class="content" id="B44"><div class="valign" id="44"></div></div></td>
         </tr>
         <tr>
-            <td id="50"></td>
-            <td id="51"></td>
-            <td id="52"></td>
-            <td id="53"></td>
-            <td id="54"></td>
+            <td><div class="content" id="B50"><div class="valign" id="50"></div></div></td>
+            <td><div class="content" id="B51"><div class="valign" id="51"></div></div></td>
+            <td><div class="content" id="B52"><div class="valign" id="52"></div></div></td>
+            <td><div class="content" id="B53"><div class="valign" id="53"></div></div></td>
+            <td><div class="content" id="B54"><div class="valign" id="54"></div></div></td>
         </tr>
 
     </table>
@@ -86,7 +87,7 @@
         </div>
 
         <div class="flex-parent btn-group">
-            <button type="button" onclick="submitLets()" style="width:75px">SUBMIT</button>
+            <button type="button" onclick="submitLets()" style="width:55px">SUBM</button>
             <button type="button" onclick="letter('Z')" id="Z">Z</button>
             <button type="button" onclick="letter('X')" id="X">X</button>
             <button type="button" onclick="letter('C')" id="C">C</button>
@@ -94,7 +95,7 @@
             <button type="button" onclick="letter('B')" id="B">B</button>
             <button type="button" onclick="letter('N')" id="N">N</button>
             <button type="button" onclick="letter('M')" id="M">M</button>
-            <button type="button" onclick="clearLets(guessLevel)" style="width:75px">CLEAR</button>
+            <button type="button" onclick="clearLets(guessLevel)" style="width:55px">CLEAR</button>
         </div>
     </div>
 
@@ -235,15 +236,15 @@
         function changeClassName(iteration, GYBS, guessLetter) {
             switch (GYBS) {
                 case 0:
-                    document.getElementById(guessLevel.toString() + iteration.toString()).classList.toggle('greenPulse' + iteration.toString());
+                    document.getElementById('B' + guessLevel.toString() + iteration.toString()).classList.toggle('greenPulse' + iteration.toString());
                     document.getElementById(guessLetter.toString()).style.backgroundColor = '#6aaa65';
                     break;
                 case 1:
-                    document.getElementById(guessLevel.toString() + iteration.toString()).classList.toggle('blackPulse' + iteration.toString());
+                    document.getElementById('B' + guessLevel.toString() + iteration.toString()).classList.toggle('blackPulse' + iteration.toString());
                     document.getElementById(guessLetter.toString()).style.backgroundColor = '#787c7f';
                     break;
                 case 2:
-                    document.getElementById(guessLevel.toString() + iteration.toString()).classList.toggle('yellowPulse' + iteration.toString());
+                    document.getElementById('B' + guessLevel.toString() + iteration.toString()).classList.toggle('yellowPulse' + iteration.toString());
                     document.getElementById(guessLetter.toString()).style.backgroundColor = '#c9b457';
                     break;
             }

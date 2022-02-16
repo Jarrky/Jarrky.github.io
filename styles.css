@@ -11,27 +11,51 @@ table, td {
     font-size: 25px;
 }
 
+
+
 table {
     text-align: center;
-    vertical-align: middle;
+    width: 90%;
 }
-tr,td {
-    height:50px;
-    width:50px;
+
+td {
+    width: 20%;
+    position: relative;
 }
+
+    td:after {
+        content: '';
+        display: block;
+        margin-top: 100%;
+    }
+
+.content {
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    height:100%;
+    width: 100%;
+}
+
+.valign {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 table.center {
     margin-left: auto;
     margin-right: auto;
 }
 
-td {
-    padding: 5px 5px;
-    
-}
+
 
 #text {
-    position:absolute;
+    position: absolute;
     font-family: Tahoma;
     top: 50%;
     left: 50%;
@@ -48,7 +72,7 @@ td {
     background-color: #333;
     color: #fff;
     text-align: center;
-    border-radius:2px;
+    border-radius: 2px;
     padding: 16px;
     position: fixed;
     z-index: 1;
@@ -56,20 +80,34 @@ td {
     bottom: 350px;
 }
 
-#snackbar.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2s;
-    animation: fadein 0.5s, fadeout 0.5s 2s;
-}
+    #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2s;
+        animation: fadein 0.5s, fadeout 0.5s 2s;
+    }
 
 @keyframes fadein {
-    from {bottom: 0;opacity:0;}
-    to {bottom: 350px; opacity:1;}
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 350px;
+        opacity: 1;
+    }
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 350px; opacity: 1;}
-    to {bottom: 0;opacity:0;}
+    from {
+        bottom: 350px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }
 
 #overlay {
@@ -89,16 +127,16 @@ td {
 .box {
     background-color: rgba(0,0,0,0.2);
     border: 1px solid white;
-    width: 650px;
+    width: 90%;
     margin: auto;
-    padding: 5px;
+    padding: 5px 5px;
     border-radius: 8px;
 }
 
 .btn-group button {
     background-color: #b8ece5;
     color: black;
-    padding: 10px 10px;
+    padding: 5px 5px;
     float: left;
     font-family: 'Tahoma';
     border: none;
@@ -112,13 +150,13 @@ td {
 
 
 
-.btn-group button:not(:last-child) {
-    border-right: none; /* Prevent double borders */
-}
+    .btn-group button:not(:last-child) {
+        border-right: none; /* Prevent double borders */
+    }
 
-.btn-group button:hover {
-    background-color: #ccfbff;
-}
+    .btn-group button:hover {
+        background-color: #ccfbff;
+    }
 
 .flex-parent {
     display: flex;
@@ -132,7 +170,7 @@ td {
 
 button {
     height: 55px;
-    width: 55px;
+    width: 100%;
 }
 
 
@@ -268,6 +306,31 @@ button {
     100% {
         background-color: #6aaa65;
     }
-    
 }
 
+
+@media only screen and (min-width:1100px) {
+    table.center {
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .box {
+        width:45%;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-width: 850px) and (max-width: 1200px) {
+    table.center {
+        width: 45%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .box {
+        width: 55%;
+        margin: auto;
+    }
+}
