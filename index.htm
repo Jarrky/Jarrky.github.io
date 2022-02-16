@@ -69,7 +69,6 @@
             <button type="button" onclick="letter('I')" id="I">I</button>
             <button type="button" onclick="letter('O')" id="O">O</button>
             <button type="button" onclick="letter('P')" id="P">P</button>
-            <button type="button" onclick="backspace()" id="DEL">del</button>
         </div>
 
 
@@ -87,7 +86,7 @@
         </div>
 
         <div class="flex-parent btn-group">
-            <button type="button" onclick="submitLets()" style="width:100%">SUBM</button>
+            <button class="EnterButton" type="button" onclick="submitLets()">ENT</button>
             <button type="button" onclick="letter('Z')" id="Z">Z</button>
             <button type="button" onclick="letter('X')" id="X">X</button>
             <button type="button" onclick="letter('C')" id="C">C</button>
@@ -95,14 +94,17 @@
             <button type="button" onclick="letter('B')" id="B">B</button>
             <button type="button" onclick="letter('N')" id="N">N</button>
             <button type="button" onclick="letter('M')" id="M">M</button>
-            <button type="button" onclick="clearLets(guessLevel)" style="width:100%">CLEAR</button>
+            <button class="DelButton" type="button" onclick="backspace()" id="DEL">DEL</button>
         </div>
     </div>
 
-    <div id="overlay" onclick="off()">
+    <div id="overlay" onclick="off('overlay')">
         <div id="text">Congratulations!</div>
     </div>
 
+    <div id="overlay2" onclick="off('overlay2')">
+        <div id="text">Unlucky!</div>
+    </div>
 
 
     <script>
@@ -118,14 +120,16 @@
     
 
     <script>
-        function on() {
-            document.getElementById("overlay").style.display = "block";
+        function on(overlayChoice) {
+            document.getElementById(overlayChoice).style.display = "block";
         }
 
-        function off() {
-            document.getElementById("overlay").style.display = "none";
+        function off(overlayChoice) {
+            document.getElementById(overlayChoice).style.display = "none";
             window.location.reload();
         }
+
+
     </script>
 
     <script>
@@ -232,6 +236,11 @@
                 setTimeout(reset, 2000);
             }
 
+            if (guessLevel == 6 && wordToGuess != guessWord) {
+                setTimeout(function () { on('overlay2'); }, 2000);
+                // on('overlay2');
+            }
+
         }
 
         function changeClassName(iteration, GYBS, guessLetter) {
@@ -264,7 +273,7 @@
                 }
             }
             guessLevel = 0;
-            on();
+            on("overlay");
         }
 
     </script>

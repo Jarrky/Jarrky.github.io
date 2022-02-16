@@ -116,7 +116,7 @@ table.center {
 }
 
 
-#overlay {
+#overlay, #overlay2 {
     position: fixed;
     display: none;
     width: 100%;
@@ -175,7 +175,7 @@ table.center {
 
 button {
     height: 55px;
-    width: 90%;
+    width: 28px;
     padding: 2px 2px;
     font-family: inherit;
     touch-action: manipulation;
@@ -317,6 +317,22 @@ button {
 }
 
 
+.EnterButton {
+    height: 55px;
+    width: 45px;
+    padding: 2px 2px;
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
+.DelButton {
+    height: 55px;
+    width: 45px;
+    padding: 2px 2px;
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
 @media only screen and (min-width:1350px) {
     table.center {
         width: 30%;
@@ -325,8 +341,23 @@ button {
     }
 
     .box {
-        width:40%;
+        width: 40%;
         margin: auto;
+    }
+
+    button {
+        height: 55px;
+        width: 80%;
+    }
+
+    .DelButton {
+        height: 55px;
+        width: 100%;
+    }
+
+    .EnterButton {
+        height: 55px;
+        width: 100%;
     }
 }
 
@@ -340,5 +371,17 @@ button {
     .box {
         width: 55%;
         margin: auto;
+    }
+    button {
+        height: 55px;
+        width: 60%;
+    }
+    .DelButton {
+        height: 55px;
+        width:100%;
+    }
+    .EnterButton {
+        height: 55px;
+        width: 100%;
     }
 }
