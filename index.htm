@@ -103,15 +103,13 @@
         <div id="text">Congratulations!</div>
     </div>
 
-    <div id="snackbar">Not In Word List</div>
 
 
     <script>
         function notInList() {
-            var x = document.getElementById("snackbar");
-            x.className = "show";
-
-            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            for (i = 0; i < 5; i++) {
+                document.getElementById('B' + guessLevel.toString() + i.toString()).classList.toggle('shake');
+            }
         }
     </script>
 
@@ -126,6 +124,7 @@
 
         function off() {
             document.getElementById("overlay").style.display = "none";
+            window.location.reload();
         }
     </script>
 
@@ -193,6 +192,8 @@
         function submitLets() {
             let check = false;
 
+
+
             var guessWord = document.getElementById(guessLevel.toString() + "0").innerHTML +
                 document.getElementById(guessLevel.toString() + "1").innerHTML +
                 document.getElementById(guessLevel.toString() + "2").innerHTML +
@@ -228,7 +229,7 @@
             }
 
             if (wordToGuess == guessWord) {
-                setTimeout(reset, 3000);
+                setTimeout(reset, 2000);
             }
 
         }
