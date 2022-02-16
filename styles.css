@@ -1,6 +1,7 @@
 body {
     background-color: #486a6a;
     font-family: Georgia;
+    touch-action:manipulation;
 }
 
 table, td {
@@ -172,6 +173,7 @@ button {
     width: 90%;
     padding: 2px 2px;
     font-family: inherit;
+    touch-action: manipulation;
 }
 
 
