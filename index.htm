@@ -51,12 +51,9 @@
             <td><div class="content" id="B53"><div class="valign" id="53"></div></div></td>
             <td><div class="content" id="B54"><div class="valign" id="54"></div></div></td>
         </tr>
-
     </table>
     <br />
 
-    <p></p>
-    <p id="log"></p>
     <div class="box">
         <div class="flex-parent btn-group">
             <button type="button" onclick="letter('Q')" id="Q">Q</button>
@@ -70,7 +67,6 @@
             <button type="button" onclick="letter('O')" id="O">O</button>
             <button type="button" onclick="letter('P')" id="P">P</button>
         </div>
-
 
         <div class="flex-parent btn-group">
             <button type="button" onclick="letter('A')" id="A">A</button>
@@ -107,7 +103,9 @@
     </div>
 
 
+    
     <script>
+        // Function: Shake letters not in list 
         function notInList() {
             for (i = 0; i < 5; i++) {
                 document.getElementById('B' + guessLevel.toString() + i.toString()).classList.toggle('shake');
@@ -115,11 +113,11 @@
         }
     </script>
 
+    
     <script type="text/javascript" src="wordlist.js"></script>
-    
-    
 
     <script>
+        // Functions: overlay off/on
         function on(overlayChoice) {
             document.getElementById(overlayChoice).style.display = "block";
         }
@@ -129,10 +127,11 @@
             window.location.reload();
         }
 
-
+        
     </script>
 
     <script>
+        // Function: letter press
         document.addEventListener('keydown', logKey);
 
         function logKey(e) {
@@ -149,6 +148,115 @@
     </script>
 
     <script>
+        // Function: change the class of each table element to plain colour
+        function changePlainClass(guessLvl, iteration, colourNumber) {
+            switch (colourNumber) {
+                case "0":
+                    document.getElementById('B' + guessLvl.toString() + iteration.toString()).classList.toggle('plainGreen');
+                    break;
+                case "1":
+                    document.getElementById('B' + guessLvl.toString() + iteration.toString()).classList.toggle('plainBlack');
+                    break;
+                case "2":
+                    document.getElementById('B' + guessLvl.toString() + iteration.toString()).classList.toggle('plainYellow');
+                    break;
+            }
+
+        }
+    </script>
+
+    <script>
+        // Level of guess from 0 to 5
+        var guessLevel = 0;
+
+        // Checking the date that was stored on letter submission verses todays date. If they are not level, local storage variables are cleared
+        var dateCheck = (new Date()).setHours(0, 0, 0, 0);
+        if (dateCheck != window.localStorage.getItem("todaysDate") && window.localStorage.getItem("todaysDate") != null) {
+            console.log("WTTTTFFF");
+            localStorage.clear();
+        }
+
+    </script>
+
+    <!-- Reading from local storage-->
+    <script>
+        // Reading the guessed words and their appropriate colours from local storage
+        if (window.localStorage.getItem("guessWord0") != null) {
+            var storedWord0 = window.localStorage.getItem("guessWord0");
+            var answer = [];
+            for (i = 0; i < 5; i++) {
+                document.getElementById("0" + i.toString()).innerHTML = storedWord0[i];
+
+                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
+                changePlainClass(guessLevel, i, answer[i]);
+            }
+            guessLevel++;
+
+        }
+
+        if (window.localStorage.getItem("guessWord1") != null) {
+            var storedWord1 = window.localStorage.getItem("guessWord1");
+            var answer = [];
+            for (i = 0; i < 5; i++) {
+                document.getElementById("1" + i.toString()).innerHTML = storedWord1[i];
+
+                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
+                changePlainClass(guessLevel, i, answer[i]);
+            }
+            guessLevel++;
+        }
+        if (window.localStorage.getItem("guessWord2") != null) {
+            var storedWord2 = window.localStorage.getItem("guessWord2");
+            var answer = [];
+            for (i = 0; i < 5; i++) {
+                document.getElementById("2" + i.toString()).innerHTML = storedWord2[i];
+
+                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
+                changePlainClass(guessLevel, i, answer[i]);
+            }
+
+            guessLevel++;
+        }
+        if (window.localStorage.getItem("guessWord3") != null) {
+            var storedWord3 = window.localStorage.getItem("guessWord3");
+            var answer = [];
+            for (i = 0; i < 5; i++) {
+                document.getElementById("3" + i.toString()).innerHTML = storedWord3[i];
+
+                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
+                changePlainClass(guessLevel, i, answer[i]);
+            }
+
+            guessLevel++;
+        }
+        if (window.localStorage.getItem("guessWord4") != null) {
+            var storedWord4 = window.localStorage.getItem("guessWord4");
+            var answer = [];
+            for (i = 0; i < 5; i++) {
+                document.getElementById("4" + i.toString()).innerHTML = storedWord4[i];
+
+                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
+                changePlainClass(guessLevel, i, answer[i]);
+            }
+
+            guessLevel++;
+        }
+        if (window.localStorage.getItem("guessWord5") != null) {
+            var storedWord5 = window.localStorage.getItem("guessWord5");
+            var answer = [];
+            for (i = 0; i < 5; i++) {
+                document.getElementById("5" + i.toString()).innerHTML = storedWord5[i];
+
+                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
+                changePlainClass(guessLevel, i, answer[i]);
+            }
+            guessLevel++;
+        }
+    </script>
+
+    <!-- Array of dates-->
+    <script>
+        // Creating an array of dates
         const today = new Date().toDateString();
         const dates = new Array(365);
         dates[0] = new Date("02/10/2022");
@@ -160,10 +268,12 @@
         }
     </script>
 
+
     <script>
-        var guessLevel = 0;
+        // Set the word based on current date
         var wordToGuess = setWord(dates);
 
+        // Backspace button
         function backspace() {
             for (let i = 4; i >= 0; i--) {
                 let k = guessLevel.toString() + i.toString();
@@ -174,6 +284,7 @@
             }
         }
 
+        // Letter buttons
         function letter(example) {
             for (let i = 0; i < 5; i++) {
                 let k = guessLevel.toString() + i.toString();
@@ -184,19 +295,11 @@
             }
         }
 
-        const scores = new Array(365).fill(7);
-
-        function updateScore(score) {
-            if (scores[dates.indexOf(today)] == 7) {
-                console.log("here");
-                scores[dates.indexOf(today)] = score;
-            }
-        }
-
+        // Function
         function submitLets() {
+            var todaysDate = (new Date()).setHours(0,0,0,0);
+            window.localStorage.setItem("todaysDate", todaysDate);
             let check = false;
-
-
 
             var guessWord = document.getElementById(guessLevel.toString() + "0").innerHTML +
                 document.getElementById(guessLevel.toString() + "1").innerHTML +
@@ -210,25 +313,80 @@
                 notInList();
             } else {
                 check = true;
-            }    
+            }
 
             if (check) {
-                const ans = [];
+
+                const ans = [1, 1, 1, 1, 1];
+                var guessCounter = [1, 1, 1, 1, 1];
 
                 for (i = 0; i < 5; i++) {
-                    switch (wordToGuess.indexOf(guessWord[i])) {
-                        case i: // green
-                            ans[i] = 0;
-                            break;
-                        case -1: // black
-                            ans[i] = 1;
-                            break;
-                        default: // yellow
-                            ans[i] = 2;
-                            break;
+                    if (guessWord[i] == wordToGuess[i]) {
+                        ans[i] = 0;
+                        guessCounter[wordToGuess.indexOf(guessWord[i])]++;
                     }
+                }
+
+                for (i = 0; i < 5; i++) {
+                    if (ans[i] != 0) {
+                        var wordToGuessOccurences = wordToGuess.split(guessWord[i]).length - 1;
+                        if (guessCounter[wordToGuess.indexOf(guessWord[i])] <= wordToGuessOccurences && wordToGuess.indexOf(guessWord[i]) > -1) {
+                            ans[i] = 2;
+                        }
+                        else {
+                            ans[i] = 1;
+                        }
+                        guessCounter[wordToGuess.indexOf(guessWord[i])]++;
+                    }
+                }
+
+                for (i = 0; i < 5; i++) {
                     changeClassName(i, ans[i], guessWord[i]);
                 }
+
+               
+
+                //local storage
+                switch (guessLevel) {
+                    case 0:
+                        window.localStorage.setItem('guessWord0', guessWord);
+                        for (i = 0; i < 5; i++) {
+                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
+                        }
+                        break;
+                    case 1:
+                        window.localStorage.setItem('guessWord1', guessWord);
+                        for (i = 0; i < 5; i++) {
+                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
+                        }
+                        break;
+                    case 2:
+                        window.localStorage.setItem('guessWord2', guessWord);
+                        for (i = 0; i < 5; i++) {
+                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
+                        }
+                        break;
+                    case 3:
+                        window.localStorage.setItem('guessWord3', guessWord);
+                        for (i = 0; i < 5; i++) {
+                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
+                        }
+                        break;
+                    case 4:
+                        window.localStorage.setItem('guessWord4', guessWord);
+                        for (i = 0; i < 5; i++) {
+                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
+                        }
+                        break;
+                    case 5:
+                        window.localStorage.setItem('guessWord5', guessWord);
+                        for (i = 0; i < 5; i++) {
+                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
+                        }
+                        break;
+                }
+
+
                 guessLevel += 1;
             }
 
@@ -238,7 +396,6 @@
 
             if (guessLevel == 6 && wordToGuess != guessWord) {
                 setTimeout(function () { on('overlay2'); }, 2000);
-                // on('overlay2');
             }
 
         }
@@ -259,6 +416,8 @@
                     break;
             }
         }
+
+        
 
         function reset() {
             clearLets(0);
