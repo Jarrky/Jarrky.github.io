@@ -99,11 +99,8 @@
     </div>
 
     <div id="overlay2" onclick="off('overlay2')">
-        <div id="text">Unlucky!</div>
+        <div id="textOverlay">Unlucky!</div>
     </div>
-
-
-
 
 
     <!-- FUNCTIONS -->
@@ -292,6 +289,7 @@
 
             // if the guess is wrong and the final guess
             if (guessLevel == 6 && wordToGuess != guessWord) {
+                document.getElementById("textOverlay").innerHTML = "Unlucky, word was " + wordToGuess;
                 setTimeout(function () { on('overlay2'); }, 2000);
             }
 
@@ -334,7 +332,7 @@
         }
 
         // Use this for testing locally
-        // localStorage.clear()
+        localStorage.clear()
 
         // Reading the guessed words and their appropriate colours from local storage
         // Loop for each layer
