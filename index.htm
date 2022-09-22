@@ -103,37 +103,33 @@
     </div>
 
 
-    
+
+
+
+    <!-- FUNCTIONS -->
+    <!-- Functions: imported from wordlist file -->
+    <script type="text/javascript" src="wordlist.js"></script>
+
+    <!-- Functions: page features -->
     <script>
-        // Function: Shake letters not in list 
+        // Function: Shake letters not in list
         function notInList() {
             for (i = 0; i < 5; i++) {
                 document.getElementById('B' + guessLevel.toString() + i.toString()).classList.toggle('shake');
             }
         }
-    </script>
 
-    
-    <script type="text/javascript" src="wordlist.js"></script>
-
-    <script>
         // Functions: overlay off/on
         function on(overlayChoice) {
             document.getElementById(overlayChoice).style.display = "block";
         }
-
         function off(overlayChoice) {
             document.getElementById(overlayChoice).style.display = "none";
             window.location.reload();
         }
 
-        
-    </script>
-
-    <script>
-        // Function: letter press
+        // Function: keyboard press
         document.addEventListener('keydown', logKey);
-
         function logKey(e) {
             if ((`${e.code}`).includes("Key")) {
                 letter((`${e.code}`).substr(3));
@@ -145,9 +141,29 @@
                 backspace();
             }
         }
-    </script>
 
-    <script>
+        // Function: backspace press
+        function backspace() {
+            for (let i = 4; i >= 0; i--) {
+                let k = guessLevel.toString() + i.toString();
+                if (document.getElementById(guessLevel.toString() + i.toString()).innerHTML != "") {
+                    document.getElementById(guessLevel.toString() + i.toString()).innerHTML = "";
+                    break;
+                }
+            }
+        }
+
+        // Function: letter press
+        function letter(example) {
+            for (let i = 0; i < 5; i++) {
+                let k = guessLevel.toString() + i.toString();
+                if (document.getElementById(k).innerHTML == "") {
+                    document.getElementById(k).innerHTML = example;
+                    break;
+                }
+            }
+        }
+
         // Function: change the class of each table element to plain colour
         function changePlainClass(guessLvl, iteration, colourNumber) {
             switch (colourNumber) {
@@ -163,247 +179,14 @@
             }
 
         }
-    </script>
 
-    <script>
-        // Level of guess from 0 to 5
-        var guessLevel = 0;
-
-        // Checking the date that was stored on letter submission verses todays date. If they are not level, local storage variables are cleared
-        var dateCheck = (new Date()).setHours(0, 0, 0, 0);
-        if (dateCheck != window.localStorage.getItem("todaysDate") && window.localStorage.getItem("todaysDate") != null) {
-            console.log("WTTTTFFF");
-            localStorage.clear();
-        }
-
-    </script>
-
-    <!-- Reading from local storage-->
-    <script>
-        // Reading the guessed words and their appropriate colours from local storage
-        if (window.localStorage.getItem("guessWord0") != null) {
-            var storedWord0 = window.localStorage.getItem("guessWord0");
-            var answer = [];
-            for (i = 0; i < 5; i++) {
-                document.getElementById("0" + i.toString()).innerHTML = storedWord0[i];
-
-                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
-                changePlainClass(guessLevel, i, answer[i]);
-            }
-            guessLevel++;
-
-        }
-
-        if (window.localStorage.getItem("guessWord1") != null) {
-            var storedWord1 = window.localStorage.getItem("guessWord1");
-            var answer = [];
-            for (i = 0; i < 5; i++) {
-                document.getElementById("1" + i.toString()).innerHTML = storedWord1[i];
-
-                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
-                changePlainClass(guessLevel, i, answer[i]);
-            }
-            guessLevel++;
-        }
-        if (window.localStorage.getItem("guessWord2") != null) {
-            var storedWord2 = window.localStorage.getItem("guessWord2");
-            var answer = [];
-            for (i = 0; i < 5; i++) {
-                document.getElementById("2" + i.toString()).innerHTML = storedWord2[i];
-
-                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
-                changePlainClass(guessLevel, i, answer[i]);
-            }
-
-            guessLevel++;
-        }
-        if (window.localStorage.getItem("guessWord3") != null) {
-            var storedWord3 = window.localStorage.getItem("guessWord3");
-            var answer = [];
-            for (i = 0; i < 5; i++) {
-                document.getElementById("3" + i.toString()).innerHTML = storedWord3[i];
-
-                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
-                changePlainClass(guessLevel, i, answer[i]);
-            }
-
-            guessLevel++;
-        }
-        if (window.localStorage.getItem("guessWord4") != null) {
-            var storedWord4 = window.localStorage.getItem("guessWord4");
-            var answer = [];
-            for (i = 0; i < 5; i++) {
-                document.getElementById("4" + i.toString()).innerHTML = storedWord4[i];
-
-                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
-                changePlainClass(guessLevel, i, answer[i]);
-            }
-
-            guessLevel++;
-        }
-        if (window.localStorage.getItem("guessWord5") != null) {
-            var storedWord5 = window.localStorage.getItem("guessWord5");
-            var answer = [];
-            for (i = 0; i < 5; i++) {
-                document.getElementById("5" + i.toString()).innerHTML = storedWord5[i];
-
-                answer[i] = window.localStorage.getItem("answer" + guessLevel.toString() + i.toString());
-                changePlainClass(guessLevel, i, answer[i]);
-            }
-            guessLevel++;
-        }
-    </script>
-
-    <!-- Array of dates-->
-    <script>
-        // Creating an array of dates
-        const today = new Date().toDateString();
-        const dates = new Array(365);
-        dates[0] = new Date("02/10/2022");
-
-        for (i = 1; i < 365; i++) {
-            dates[i] = new Date("02/10/2022");
-            dates[i].setDate(dates[0].getDate() + i);
-            dates[i] = dates[i].toDateString();
-        }
-    </script>
-
-
-    <script>
-        // Set the word based on current date
-        var wordToGuess = setWord(dates);
-
-        // Backspace button
-        function backspace() {
-            for (let i = 4; i >= 0; i--) {
-                let k = guessLevel.toString() + i.toString();
-                if (document.getElementById(guessLevel.toString() + i.toString()).innerHTML != "") {
-                    document.getElementById(guessLevel.toString() + i.toString()).innerHTML = "";
-                    break;
-                }
-            }
-        }
-
-        // Letter buttons
-        function letter(example) {
-            for (let i = 0; i < 5; i++) {
-                let k = guessLevel.toString() + i.toString();
-                if (document.getElementById(k).innerHTML == "") {
-                    document.getElementById(k).innerHTML = example;
-                    break;
-                }
-            }
-        }
-
-        // Function
-        function submitLets() {
-            var todaysDate = (new Date()).setHours(0,0,0,0);
-            window.localStorage.setItem("todaysDate", todaysDate);
-            let check = false;
-
-            var guessWord = document.getElementById(guessLevel.toString() + "0").innerHTML +
-                document.getElementById(guessLevel.toString() + "1").innerHTML +
-                document.getElementById(guessLevel.toString() + "2").innerHTML +
-                document.getElementById(guessLevel.toString() + "3").innerHTML +
-                document.getElementById(guessLevel.toString() + "4").innerHTML;
-
-            if (guessWord.length != 5) {
-                // window.alert("Not complete");
-            } else if (checkWord(guessWord) == 0) {
-                notInList();
-            } else {
-                check = true;
-            }
-
-            if (check) {
-
-                const ans = [1, 1, 1, 1, 1];
-                var guessCounter = [1, 1, 1, 1, 1];
-
-                for (i = 0; i < 5; i++) {
-                    if (guessWord[i] == wordToGuess[i]) {
-                        ans[i] = 0;
-                        guessCounter[wordToGuess.indexOf(guessWord[i])]++;
-                    }
-                }
-
-                for (i = 0; i < 5; i++) {
-                    if (ans[i] != 0) {
-                        var wordToGuessOccurences = wordToGuess.split(guessWord[i]).length - 1;
-                        if (guessCounter[wordToGuess.indexOf(guessWord[i])] <= wordToGuessOccurences && wordToGuess.indexOf(guessWord[i]) > -1) {
-                            ans[i] = 2;
-                        }
-                        else {
-                            ans[i] = 1;
-                        }
-                        guessCounter[wordToGuess.indexOf(guessWord[i])]++;
-                    }
-                }
-
-                for (i = 0; i < 5; i++) {
-                    changeClassName(i, ans[i], guessWord[i]);
-                }
-
-               
-
-                //local storage
-                switch (guessLevel) {
-                    case 0:
-                        window.localStorage.setItem('guessWord0', guessWord);
-                        for (i = 0; i < 5; i++) {
-                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
-                        }
-                        break;
-                    case 1:
-                        window.localStorage.setItem('guessWord1', guessWord);
-                        for (i = 0; i < 5; i++) {
-                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
-                        }
-                        break;
-                    case 2:
-                        window.localStorage.setItem('guessWord2', guessWord);
-                        for (i = 0; i < 5; i++) {
-                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
-                        }
-                        break;
-                    case 3:
-                        window.localStorage.setItem('guessWord3', guessWord);
-                        for (i = 0; i < 5; i++) {
-                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
-                        }
-                        break;
-                    case 4:
-                        window.localStorage.setItem('guessWord4', guessWord);
-                        for (i = 0; i < 5; i++) {
-                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
-                        }
-                        break;
-                    case 5:
-                        window.localStorage.setItem('guessWord5', guessWord);
-                        for (i = 0; i < 5; i++) {
-                            window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
-                        }
-                        break;
-                }
-
-
-                guessLevel += 1;
-            }
-
-            if (wordToGuess == guessWord) {
-                setTimeout(reset, 2000);
-            }
-
-            if (guessLevel == 6 && wordToGuess != guessWord) {
-                setTimeout(function () { on('overlay2'); }, 2000);
-            }
-
-        }
-
+        // Function: change the colour of each table element using an animation
         function changeClassName(iteration, GYBS, guessLetter) {
             switch (GYBS) {
                 case 0:
+                    // box colour
                     document.getElementById('B' + guessLevel.toString() + iteration.toString()).classList.toggle('greenPulse' + iteration.toString());
+                    // keyboard colour
                     document.getElementById(guessLetter.toString()).style.backgroundColor = '#6aaa65';
                     break;
                 case 1:
@@ -417,15 +200,108 @@
             }
         }
 
-        
 
+        // Function for submitting of the guess
+        function submitLets() {
+            // store today's date
+            var todaysDate = (new Date()).setHours(0, 0, 0, 0);
+            window.localStorage.setItem("todaysDate", todaysDate);
+
+            let check = false;
+
+            // set the variable guessWord equal to the 5 letters submitted
+            var guessWord = document.getElementById(guessLevel.toString() + "0").innerHTML +
+                document.getElementById(guessLevel.toString() + "1").innerHTML +
+                document.getElementById(guessLevel.toString() + "2").innerHTML +
+                document.getElementById(guessLevel.toString() + "3").innerHTML +
+                document.getElementById(guessLevel.toString() + "4").innerHTML;
+
+            // if the user tries to submit an incomplete word or word not in list
+            if (guessWord.length != 5) {
+                // do something?
+            } else if (checkWord(guessWord) == 0) {
+                notInList();
+            } else {
+                check = true;
+            }
+
+            // if the check is completed and the guess is okay
+            if (check) {
+
+                // variables to track ********. 0 = correct, 1 = incorrect , 2 = wrong position
+                const ans = [1, 1, 1, 1, 1];
+                var guessCounter = [1, 1, 1, 1, 1];
+
+                // for each letter in the guess
+                for (i = 0; i < 5; i++) {
+                    // if the letter matches
+                    if (guessWord[i] == wordToGuess[i]) {
+                        // set the index of that correct letter to 0 (green)
+                        ans[i] = 0;
+                        // increment the guessCounter for that index
+                        guessCounter[wordToGuess.indexOf(guessWord[i])]++;
+                    }
+                }
+
+                // for each letter in the guess, check if located in other location in word
+                for (i = 0; i < 5; i++) {
+                    // if the letter is incorrect or wrong position
+                    if (ans[i] != 0) {
+                        var wordToGuessOccurences = wordToGuess.split(guessWord[i]).length - 1;
+                        if (guessCounter[wordToGuess.indexOf(guessWord[i])] <= wordToGuessOccurences && wordToGuess.indexOf(guessWord[i]) > -1) {
+                            ans[i] = 2;
+                        }
+                        else {
+                            ans[i] = 1;
+                        }
+                        guessCounter[wordToGuess.indexOf(guessWord[i])]++;
+                    }
+                }
+
+                // animate the change of colour for the classes
+                for (i = 0; i < 5; i++) {
+                    changeClassName(i, ans[i], guessWord[i]);
+                }
+
+
+                // local storage for the keyboard colours
+                const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+                const alphabet_ = {};
+                // store the colour of each letter in "alphabet_" object, i.e. "A: '#787c7f'"
+                for (i = 0; i < alphabet.length; i++) {
+                    var keyName = alphabet[i];
+                    alphabet_[keyName] = document.getElementById(alphabet[i]).style.backgroundColor;
+                }
+                // store in local storage, using JSON to convert to string (required for object storage)
+                window.localStorage.setItem("keyboardColours", JSON.stringify(alphabet_));
+
+                
+                // local storage for the guessedword, and the relevant class colours (answer)
+                window.localStorage.setItem('guessWord' + guessLevel.toString(), guessWord);
+                for (i = 0; i < 5; i++) {
+                    window.localStorage.setItem("answer" + guessLevel.toString() + i.toString(), ans[i]);
+                }
+                // After a successfull guess, increment the guess level
+                guessLevel += 1;
+            }
+
+            // if the guess is correct
+            if (wordToGuess == guessWord) {
+                setTimeout(reset, 2000);
+            }
+
+            // if the guess is wrong and the final guess
+            if (guessLevel == 6 && wordToGuess != guessWord) {
+                setTimeout(function () { on('overlay2'); }, 2000);
+            }
+
+        }
+
+        // Function: reset the letters
         function reset() {
-            clearLets(0);
-            clearLets(1);
-            clearLets(2);
-            clearLets(3);
-            clearLets(4);
-            clearLets(5);
+            for (i = 0; i < 6; i++) {
+                clearLets(i);
+            }
             for (j = 0; j < 6; j++) {
                 for (i = 0; i < 5; i++) {
                     document.getElementById(j.toString() + i.toString()).classList.toggle('resetPulse');
@@ -435,15 +311,77 @@
             on("overlay");
         }
 
-    </script>
-
-    <script>
+        // Function: clear a row of letters
         function clearLets(levelOn) {
             for (let i = 0; i < 5; i++) {
                 let k = levelOn.toString() + i.toString();
                 document.getElementById(k).innerHTML = "";
             }
         }
+
+    </script>
+
+
+    <!-- Program Execution -->
+    <script>
+        // Level of guess from 0 to 5. 0 being first layer, 5 being last layer.
+        var guessLevel = 0;
+
+        // Checking the date that was stored on letter submission verses todays date. If they are not level, local storage variables are cleared
+        var dateCheck = (new Date()).setHours(0, 0, 0, 0);
+        if (dateCheck != window.localStorage.getItem("todaysDate") && window.localStorage.getItem("todaysDate") != null) {
+            localStorage.clear();
+        }
+
+        // Use this for testing locally
+        // localStorage.clear()
+
+        // Reading the guessed words and their appropriate colours from local storage
+        // Loop for each layer
+        for (storageGuessLevel = 0; storageGuessLevel < 6; storageGuessLevel++) {
+            // if there is a stored guess for that layer
+            if (window.localStorage.getItem("guessWord" + storageGuessLevel.toString()) != null) {
+                // get the stored word
+                var storedWord = window.localStorage.getItem("guessWord" + storageGuessLevel.toString());
+                var answerColour;
+
+                // for each letter in the word
+                for (guessLetterIndex = 0; guessLetterIndex < 5; guessLetterIndex++) {
+                    // Display the letter in the correct location
+                    document.getElementById(storageGuessLevel.toString() + guessLetterIndex.toString()).innerHTML = storedWord[guessLetterIndex];
+                    // Get the colour of the guess type from storage
+                    answerColour = window.localStorage.getItem("answer" + storageGuessLevel.toString() + guessLetterIndex.toString());
+                    // Change the colour of the box
+                    changePlainClass(storageGuessLevel, guessLetterIndex, answerColour)
+                }
+                // Increment the guess level
+                guessLevel++;
+            }
+        }
+
+        // Reading keyboard colours from local storage
+        keyboardColours = window.localStorage.getItem("keyboardColours");
+        // JSON needed to convert back to object from string
+        keyboardColoursObject = JSON.parse(keyboardColours);
+        // for each property (A,B,C,...), get element by Id of that property, and change the colour to the equivalent colour for that property
+        for (const property in keyboardColoursObject) {
+            document.getElementById(property).style.backgroundColor = keyboardColoursObject[property];
+        }
+
+
+        // Creating an array of dates
+        const today = new Date().toDateString();
+        const dates = new Array(1000);
+        dates[0] = new Date("02/10/2022");
+        for (i = 1; i < 1000; i++) {
+            dates[i] = new Date("02/10/2022");
+            dates[i].setDate(dates[0].getDate() + i);
+            dates[i] = dates[i].toDateString();
+        }
+
+        // Set the word based on current date
+        var wordToGuess = setWord(dates);
+
     </script>
 
 

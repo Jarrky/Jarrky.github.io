@@ -5762,7 +5762,7 @@ words = ['which',
 function setWord(dates) {
     const today = new Date().toDateString();
 
-    for (i = 1; i < 365; i++) {
+    for (i = 1; i < 1000; i++) {
         if (dates[i] == today) {
             var todaysWord = (words[i + 300]).toUpperCase();
             break;
